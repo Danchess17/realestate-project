@@ -38,7 +38,10 @@ create table real_estate.realtor (
     from_company boolean not null, 
     checked_realtor boolean not null, 
     request_got_amount int not null, 
-    rating int,
+    rating decimal,
+
+    constraint rating_range_check
+    check(rating is null or rating >= 0 and rating <= 10),
 
     constraint realtor_pk primary key (realtor_id)
 );
@@ -52,7 +55,10 @@ create table real_estate.realtor_history (
     new_from_company boolean not null, 
     new_checked_realtor boolean not null, 
     new_request_got_amount int not null, 
-    new_rating int,
+    new_rating decimal,
+
+    constraint new_rating_range_check
+    check(new_rating is null or new_rating >= 0 and new_rating <= 10),
 
     constraint change_realtor_pk primary key (change_id), 
 
