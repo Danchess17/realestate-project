@@ -40,7 +40,7 @@
 | `from_company`             | Риелтор от компании или частный                  | `BOOLEAN`         | `NOT NULL`    |
 | `checked_realtor`          | Проверенный (сертифицированный) риэлтор или нет  | `BOOLEAN`       | `NOT NULL`    |
 | `request_got_amount`     | Счетчик полученных запросов помощи от клиентов     | `INTEGER`       | `NOT NULL` |
-| `rating`                  | Рейтинг риелтора  (от 0 до 10)                    | `DECIMAL`   | `IS NULL OR BETWEEN 0 AND 10` |
+| `rating`                  | Рейтинг риелтора  (от 0 до 10)                    | `DECIMAL`   | `BETWEEN 0 AND 10` |
 
 Таблица `real_estate.realtor_history`:
 
@@ -54,7 +54,7 @@
 | `new_from_company`             | Риелтор от компании или частный                  | `BOOLEAN`      | `NOT NULL` |
 | `new_checked_realtor`          | Проверенный (сертифицированный) риелтор или нет  | `BOOLEAN`      | `NOT NULL` |
 | `new_request_got_amount`     | Счетчик полученных запросов помощи от клиентов     | `INTEGER`   | `NOT NULL` |
-| `new_rating`                  | Рейтинг риелтора  (от 0 до 10)                    | `DECIMAL`   | `IS NULL OR BETWEEN 0 AND 10` |
+| `new_rating`                  | Рейтинг риелтора  (от 0 до 10)                    | `DECIMAL`   | `BETWEEN 0 AND 10` |
 
 Таблица `real_estate.client`:
 
