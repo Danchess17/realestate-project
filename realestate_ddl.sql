@@ -3,7 +3,7 @@ create schema real_estate;
 create table real_estate.account (
     account_id int not null, 
     online boolean not null, 
-    telephone varchar(30) not null,
+    telephone varchar(255) not null,
     email varchar(255) not null,
     account_type varchar(255) not null,
     registration_time timestamp without time zone not null,
@@ -18,7 +18,7 @@ create table real_estate.account_version_history (
     change_time timestamp without time zone not null,
     account_id int not null, 
     new_online boolean not null, 
-    new_telephone varchar(30) not null,
+    new_telephone varchar(255) not null,
     new_email varchar(255) not null,
     new_account_type varchar(255) not null,
     new_complaint_counter int not null,
