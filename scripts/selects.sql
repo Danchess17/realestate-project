@@ -18,3 +18,5 @@ select * from real_estate.apartment where kitchen_area_amt = (
     select max(kitchen_area_amt) from real_estate.apartment
 );
 
+select * from real_estate.transaction_history 
+where extract(year from transaction_dttm) between 2019 and 2022;
