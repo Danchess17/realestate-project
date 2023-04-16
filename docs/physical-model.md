@@ -160,8 +160,8 @@ create table real_estate.realtor (
     request_got_cnt int not null, 
     realtor_rate decimal,
 
-    constraint rating_range_check
-    check(rating is null or rating between 0 and 10),
+    constraint realtor_rate_range_check
+    check(realtor_rate is null or realtor_rate between 0 and 10),
 
     constraint realtor_pk primary key (realtor_id)
 );
@@ -178,8 +178,8 @@ create table real_estate.realtor_history (
     new_request_got_cnt int not null, 
     new_realtor_rate decimal,
 
-    constraint new_rating_range_check
-    check(new_rating is null or new_rating between 0 and 10),
+    constraint new_realtor_rate_range_check
+    check(new_realtor_rate is null or new_realtor_rate between 0 and 10),
 
     constraint change_realtor_pk primary key (change_id), 
 
