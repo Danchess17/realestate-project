@@ -20,3 +20,6 @@ select * from real_estate.apartment where kitchen_area_amt = (
 
 select * from real_estate.transaction_history 
 where extract(year from transaction_dttm) between 2019 and 2022;
+
+select * from real_estate.announcement where made_by_realtor_flg = true 
+order by announcement_price_cnt desc;
