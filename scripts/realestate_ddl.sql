@@ -105,7 +105,7 @@ create table real_estate.announcement (
     apartment_id int not null, 
     apartment_desc varchar(1000),
     announcement_type varchar(255) not null, 
-    announcement_price_cnt varchar(255) not null, 
+    announcement_price_cnt int not null, 
     made_by_realtor_flg boolean not null,
     active_flg boolean not null,
 
