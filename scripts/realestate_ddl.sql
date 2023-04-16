@@ -149,3 +149,4 @@ create table real_estate.transaction_history (
     references real_estate.account(account_id) 
     on delete set null
 );
+
