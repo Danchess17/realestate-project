@@ -14,5 +14,4 @@ create index realtor_announcement on real_estate.announcement
 using btree(made_by_realtor_flg);
 
 create index transaction on real_estate.transaction_history
-using btree(seller_id, buyer_id, apartment_id, 
-transaction_dttm, transaction_price_cnt);
+using btree(seller_id, buyer_id, apartment_id, transaction_dttm, transaction_price_cnt);
