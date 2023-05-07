@@ -27,3 +27,16 @@ create or replace view clients_and_realtors as (
 	pairs.realtor_id, concat(r.first_name, ' ', r.second_name) as realtor from pairs, real_estate.account c, 
 	real_estate.account r where pairs.client_id = c.account_id and pairs.realtor_id = r.account_id
 );
+
+create or replace view ranked_realtors as (
+	with active_realtors as (
+		select distinct seller_realtor_id as realtor_id
+		from real_estate.transaction_history where seller_realtor_id is not null
+		union 
+		select distinct buyer_realtor_id as realtor_id 
+		from real_estate.transaction_history where buyer_realtor_id is not null
+	)
+	select distinct concat(acc.first_name, ' ', acc.second_name) as realtor, r.realtor_rate 
+	from active_realtors a, real_estate.realtor r, real_estate.account acc where a.realtor_id = r.realtor_id
+	and acc.account_id = a.realtor_id order by realtor_rate desc
+);
