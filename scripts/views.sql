@@ -40,3 +40,7 @@ create or replace view ranked_realtors as (
 	from active_realtors a, real_estate.realtor r, real_estate.account acc where a.realtor_id = r.realtor_id
 	and acc.account_id = a.realtor_id order by realtor_rate desc
 );
+
+create or replace view active_oneroom_apartments as 
+select * from real_estate.apartment where flat_cnt = 1 and apartment_id 
+in (select apartment_id from real_estate.announcement where active_flg);
