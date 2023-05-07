@@ -1,6 +1,7 @@
-select realtor_flg, count(*) from real_estate.account group by realtor_flg;
+select (realtor_id is not null) as realtor, count(*) from real_estate.account 
+group by (realtor_id is not null)
 
-select * from real_estate.apartment where flat_cnt = 2 and total_area > 60;
+select * from real_estate.apartment where flat_cnt = 2 and total_area_amt > 60;
 
 select realtor_rate from real_estate.realtor where realtor_id in (
     select distinct seller_realtor_id from real_estate.transaction_history
@@ -20,6 +21,3 @@ select * from real_estate.apartment where kitchen_area_amt = (
 
 select * from real_estate.transaction_history 
 where extract(year from transaction_dttm) between 2019 and 2022;
-
-select * from real_estate.announcement where made_by_realtor_flg = true 
-order by announcement_price_cnt desc;
