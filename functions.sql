@@ -3,10 +3,10 @@ create or replace function change_counter(
 	complaint_cnt_delta integer default 0, 
 	transaction_cnt_delta integer default 0
 )
-returns table (
+returns table(
 	account_id integer, 
-    new_complaint_cnt integer,
-    new_transaction_cnt integer
+	new_complaint_cnt integer,
+	new_transaction_cnt integer
 ) as $$ 
 select account_id, complaint_cnt, transaction_cnt 
 from real_estate.account where account_id != $1 
