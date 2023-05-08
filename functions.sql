@@ -14,3 +14,14 @@ union
 select account_id, complaint_cnt + $2, transaction_cnt + $3
 from real_estate.account where account_id = $1
 $$ language sql;
+
+
+create or replace function realtor_closed_affairs(realtor_id integer)
+returns integer as $$
+declare 
+	cnt integer;
+begin 
+	select transaction_cnt into cnt from real_estate.account where $1 = account_id;
+	return cnt;
+end;
+$$ language plpgsql;
