@@ -19,9 +19,17 @@ $$ language sql;
 create or replace function realtor_closed_affairs(realtor_id integer)
 returns integer as $$
 declare 
-	cnt integer;
+	cnt integer := 0;
 begin 
-	select transaction_cnt into cnt from real_estate.account where $1 = account_id;
-	return cnt;
+	select count(transaction_id) into cnt from (
+			select transaction_id, seller_realtor_id as r_id from real_estate.transaction_history
+			where seller_realtor_id is not null
+			union 
+			select transaction_id, buyer_realtor_id as r_id from real_estate.transaction_history
+			where buyer_realtor_id is not null
+		) as realtors group by r_id having $1 = r_id;
+	if (cnt is null) then return 0;
+	else return cnt;
+	end if;
 end;
 $$ language plpgsql;
