@@ -33,3 +33,14 @@ begin
 	end if;
 end;
 $$ language plpgsql;
+
+
+create or replace function account_complaint_cnt(acc_id integer)
+returns integer as $$
+declare 
+	cnt integer;
+begin 
+	select complaint_cnt into cnt from real_estate.account where $1 = account_id;
+	return cnt;
+end;
+$$ language plpgsql;
