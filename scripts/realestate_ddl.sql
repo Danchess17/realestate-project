@@ -1,40 +1,5 @@
 create schema real_estate;
 
-create table real_estate.account (
-    account_id int not null, 
-    online_flg boolean not null, 
-    telephone_no varchar(255) not null,
-    email varchar(255) not null,
-    realtor_flg boolean not null,
-    registration_dttm timestamp without time zone not null,
-    complaint_cnt int not null,
-    transaction_cnt int not null,
-    first_name varchar(255) not null,
-    second_name varchar(255) not null, 
-
-    constraint account_pk primary key (account_id)
-);
-
-create table real_estate.account_version_history (
-    change_id int not null,
-    change_dttm timestamp without time zone not null,
-    account_id int not null, 
-    new_online_flg boolean not null, 
-    new_telephone_no varchar(255) not null,
-    new_email varchar(255) not null,
-    new_realtor_flg boolean not null,
-    new_complaint_cnt int not null,
-    new_transaction_cnt int not null,
-    new_first_name varchar(255) not null,
-    new_second_name varchar(255) not null, 
-
-    constraint change_account_pk primary key (change_id), 
-
-    constraint fk_account foreign key (account_id) 
-    references real_estate.account(account_id) 
-    on delete set null
-);
-
 create table real_estate.realtor (
     realtor_id int not null, 
     from_company_flg boolean not null, 
@@ -84,6 +49,54 @@ create table real_estate.client_history (
 
     constraint fk_client foreign key (client_id) 
     references real_estate.client(client_id) 
+    on delete set null
+);
+
+create table real_estate.account (
+    account_id int not null, 
+    online_flg boolean not null, 
+    telephone_no varchar(255) not null,
+    email varchar(255) not null,
+    client_id int not null,
+    realtor_id int,
+    registration_dttm timestamp without time zone not null,
+    complaint_cnt int not null,
+    transaction_cnt int not null,
+    first_name varchar(255) not null,
+    second_name varchar(255) not null, 
+
+    constraint account_pk primary key (account_id), 
+
+    constraint fk_client foreign key (client_id) 
+    references real_estate.client(client_id) 
+    on delete set null,
+
+    constraint fk_realtor foreign key (realtor_id) 
+    references real_estate.realtor(realtor_id) 
+    on delete set null
+);
+
+create table real_estate.account_version_history (
+    change_id int not null,
+    change_dttm timestamp without time zone not null,
+    account_id int not null, 
+    new_online_flg boolean not null, 
+    new_telephone_no varchar(255) not null,
+    new_email varchar(255) not null,
+    new_realtor_id int,
+    new_complaint_cnt int not null,
+    new_transaction_cnt int not null,
+    new_first_name varchar(255) not null,
+    new_second_name varchar(255) not null, 
+
+    constraint change_account_pk primary key (change_id), 
+
+    constraint fk_account foreign key (account_id) 
+    references real_estate.account(account_id) 
+    on delete set null, 
+
+    constraint fk_new_realtor foreign key (new_realtor_id) 
+    references real_estate.realtor(realtor_id) 
     on delete set null
 );
 
